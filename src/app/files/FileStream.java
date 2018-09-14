@@ -1,4 +1,4 @@
-package app.Files;
+package app.files;
 
 public class FileStream {
 }

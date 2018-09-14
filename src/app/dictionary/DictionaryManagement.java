@@ -1,7 +1,11 @@
 package app.dictionary;
 
 public class DictionaryManagement {
-    public void insertFromCommandline() {
+    private Dictionary dictionary = new Dictionary();
 
+    public void insertFromCommandline() {
+        Word word = new Word();
+        word.scanWord();
+        dictionary.push(word);
     }
 }

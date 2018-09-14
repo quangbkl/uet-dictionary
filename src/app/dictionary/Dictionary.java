@@ -6,18 +6,10 @@ public class Dictionary {
     private ArrayList<Word> words = new ArrayList<>();
 
     public void push(Word word) {
-        int index = words.size() - 1;
-        String insertWord = word.getSpelling();
-        if (index >= 0) {
-            while (index >= 0) {
-                String current = words.get(index).getSpelling();
-                if (insertWord.compareTo(current) > 0) break;
-                index--;
-            }
-            words.add(index + 1, word);
-        } else {
-            words.add(word);
-        }
+        int length = words.size();
+        int index = searchIndexInsert(0, length - 1, word.getSpelling());
+        if (index < length) words.add(index, word);
+        else words.add(word);
     }
 
     public void create() {
@@ -26,27 +18,34 @@ public class Dictionary {
         push(word);
     }
 
-    private Word binarySearch(int start, int end, String spelling) {
-        if (start >= end) return null;
-        int mid = (start + end) / 2;
+    public int searchIndexInsert(int start, int end, String spelling) {
+        if (end < start) return start;
+        int mid = start + (end - start) / 2;
+        if (mid == words.size()) return mid;
         Word word = words.get(mid);
         int compare = word.getSpelling().compareTo(spelling);
-        if (compare == 0) {
-            return word;
-        } else if (compare > 0) {
-            return binarySearch(start, mid, spelling);
-        } else  {
-            return binarySearch(mid + 1, end, spelling);
-        }
+        if (compare == 0) return -1;
+        if (compare > 0) return searchIndexInsert(start, mid - 1, spelling);
+        return searchIndexInsert(mid + 1, end, spelling);
+    }
+
+    private Word binarySearch(int start, int end, String spelling) {
+        if (end < start) return null;
+        int mid = start + (end - start) / 2;
+        Word word = words.get(mid);
+        int compare = word.getSpelling().compareTo(spelling);
+        if (compare == 0) return word;
+        if (compare > 0) return binarySearch(start, mid - 1, spelling);
+        return binarySearch(mid + 1, end, spelling);
     }
 
     public Word search(String spelling) {
-        return binarySearch(0, words.size(), spelling);
+        return binarySearch(0, words.size() - 1, spelling);
     }
 
     public void printWords() {
         for (Word item : words) {
-            System.out.println(item.getSpelling());
+            item.printWord();
         }
     }
 }
