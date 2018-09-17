@@ -32,7 +32,9 @@ public class Word {
 
     public void scanWord() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter spelling...");
         this.spelling = scanner.nextLine();
+        System.out.println("Enter explain...");
         this.explain = scanner.nextLine();
     }
 

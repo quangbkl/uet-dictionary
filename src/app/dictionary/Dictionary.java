@@ -43,6 +43,10 @@ public class Dictionary {
         return binarySearch(0, words.size() - 1, spelling);
     }
 
+    public ArrayList<Word> getWords() {
+        return words;
+    }
+
     public void printWords() {
         for (Word item : words) {
             item.printWord();
