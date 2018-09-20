@@ -9,6 +9,7 @@ public class Container {
     private JButton button1;
     private JButton converseButton;
     private JTextField textField1;
+    private JList list1;
 
     public Container() {
         button1.addActionListener(new ActionListener() {

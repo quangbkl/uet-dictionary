@@ -1,13 +1,16 @@
 package app.dictionary;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DictionaryManagement {
     private Dictionary dictionary = new Dictionary();
 
     public void insertFromCommandline() {
-        Word word = new Word();
-        word.scanWord();
+        Scanner scanner = new Scanner(System.in);
+        String spelling = scanner.nextLine();
+        String explain = scanner.nextLine();
+        Word word = new Word(spelling, explain);
         dictionary.push(word);
     }
 

@@ -12,12 +12,6 @@ public class Dictionary {
         else words.add(word);
     }
 
-    public void create() {
-        Word word = new Word();
-        word.scanWord();
-        push(word);
-    }
-
     public int searchIndexInsert(int start, int end, String spelling) {
         if (end < start) return start;
         int mid = start + (end - start) / 2;
@@ -45,11 +39,5 @@ public class Dictionary {
 
     public ArrayList<Word> getWords() {
         return words;
-    }
-
-    public void printWords() {
-        for (Word item : words) {
-            item.printWord();
-        }
     }
 }
