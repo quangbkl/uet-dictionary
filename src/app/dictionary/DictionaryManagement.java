@@ -1,5 +1,7 @@
 package app.dictionary;
 
+import app.files.ReadDictionaries;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +16,10 @@ public class DictionaryManagement {
         dictionary.push(word);
     }
 
-    public void insertFromFile() {}
+    public void insertFromFile() {
+        ReadDictionaries rd = new ReadDictionaries();
+        dictionary.setWords(rd.read());
+    }
 
     public ArrayList<Word> getWords() {
         return dictionary.getWords();

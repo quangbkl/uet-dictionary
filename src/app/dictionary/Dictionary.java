@@ -40,4 +40,6 @@ public class Dictionary {
     public ArrayList<Word> getWords() {
         return words;
     }
+
+    public void setWords(ArrayList<Word> words) { this.words = words; }
 }
