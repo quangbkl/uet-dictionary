@@ -4,8 +4,8 @@ public class Word {
     private String spelling, explain;
 
     public Word(String spelling, String explain) {
-        this.spelling = spelling;
-        this.explain = explain;
+        this.spelling = spelling.trim().toLowerCase();
+        this.explain = explain.trim().toLowerCase();
     }
 
     public Word() {

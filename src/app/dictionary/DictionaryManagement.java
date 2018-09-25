@@ -1,6 +1,6 @@
 package app.dictionary;
 
-import app.files.ReadDictionaries;
+import app.helper.IODictionaries;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,8 +17,35 @@ public class DictionaryManagement {
     }
 
     public void insertFromFile() {
-        ReadDictionaries rd = new ReadDictionaries();
-        dictionary.setWords(rd.read());
+        IODictionaries rd = new IODictionaries();
+//        dictionary.setWords(rd.read());   //TODO: Sort
+        ArrayList<Word> adds = rd.read();
+        for (Word add: adds) {
+            dictionary.push(add);
+        }
+    }
+
+    public void dictionaryLookup() {
+        Scanner scanner = new Scanner(System.in);
+        String spelling = scanner.nextLine();
+        Word word = dictionary.lookup(spelling);
+        System.out.println(word.getExplain());
+    }
+
+    public void dictionarySearcher() {
+        Scanner scanner = new Scanner(System.in);
+        String spelling = scanner.nextLine();
+        ArrayList<Word> words = dictionary.searcher(spelling);
+
+        for (Word word: words) {
+            System.out.print(word.getSpelling());
+            System.out.println(" " + word.getExplain());
+        }
+    }
+
+    public void dictionaryExportToFile() {
+        IODictionaries iod = new IODictionaries();
+        iod.write(dictionary.getWords());
     }
 
     public ArrayList<Word> getWords() {

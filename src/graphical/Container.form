@@ -51,6 +51,10 @@
         <properties>
           <text value="Button"/>
         </properties>
+        <clientProperties>
+          <hideActionText class="java.lang.Boolean" value="false"/>
+          <html.disable class="java.lang.Boolean" value="false"/>
+        </clientProperties>
       </component>
       <component id="51f23" class="javax.swing.JTextField" binding="textField1" default-binding="true">
         <constraints>
