@@ -32,6 +32,10 @@ public class DictionaryManagement {
         System.out.println(word.getExplain());
     }
 
+    public Word dictionaryLookup(String text) {
+        return dictionary.lookup(text);
+    }
+
     public void dictionarySearcher() {
         Scanner scanner = new Scanner(System.in);
         String spelling = scanner.nextLine();
@@ -41,6 +45,10 @@ public class DictionaryManagement {
             System.out.print(word.getSpelling());
             System.out.println(" " + word.getExplain());
         }
+    }
+
+    public ArrayList<Word> dictionarySearcher(String searchText) {
+        return dictionary.searcher(searchText);
     }
 
     public void dictionaryExportToFile() {
