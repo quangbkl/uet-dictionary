@@ -1,12 +1,16 @@
 package app.dictionary;
 
-import app.helper.IODictionaries;
+import app.helpers.IODictionaries;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DictionaryManagement {
     private Dictionary dictionary = new Dictionary();
+
+    public DictionaryManagement() {
+        this.insertFromFile();
+    }
 
     public void insertFromCommandline() {
         Scanner scanner = new Scanner(System.in);
@@ -48,6 +52,7 @@ public class DictionaryManagement {
     }
 
     public ArrayList<Word> dictionarySearcher(String searchText) {
+        if (searchText.equals("")) return new ArrayList<>();
         return dictionary.searcher(searchText);
     }
 
