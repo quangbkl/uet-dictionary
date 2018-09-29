@@ -1,27 +1,34 @@
-package app;
+package app.controllers;
 
 import app.dictionary.DictionaryManagement;
 import app.dictionary.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller {
     @FXML
-    Button btn_nav_search, btn_nav_add, btn_nav_history, btn_nav_bookmark;
+    private Button btn_nav_search, btn_nav_add, btn_nav_history, btn_nav_bookmark;
     @FXML
-    TextField input_search;
+    private TextField input_search;
     @FXML
-    AnchorPane content_pane;
-    DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    private AnchorPane content_pane;
+    private DictionaryManagement dictionaryManagement = new DictionaryManagement();
+
+    private void showHistoryPane() throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("../../graphical/history_pane.fxml"));
+        content_pane.getChildren().setAll(anchorPane);
+    }
 
     @FXML
     public void handleClickMicro(ActionEvent event) {
@@ -40,6 +47,12 @@ public class Controller {
             System.out.println("Add");
         } else if (event.getSource() == btn_nav_history) {
             System.out.println("History");
+
+            try {
+                this.showHistoryPane();
+            } catch (Exception e) {
+                System.out.println("Error load history pane.");
+            }
         } else if (event.getSource() == btn_nav_bookmark) {
             System.out.println("Bookmark");
             content_pane.setVisible(false);
