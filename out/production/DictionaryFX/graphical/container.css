@@ -33,11 +33,36 @@
 
 .header_logo {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 5.0, 0, 0, 1);
-    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 15, 0, 1, 1);*/
-    /*-webkit-box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);*/
 }
 
 .card {
     -fx-background-color: #FFFFFF;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 15, 0, 0, 0);
+}
+
+.from_input {
+    -fx-border-color: #e5e9ec;
+    -fx-background-color: white;
+    -fx-background-radius: 0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+.from_input:focused {
+    -fx-border-color: #a768f3;
+}
+
+.btn_primary {
+    -fx-cursor: hand;
+    -fx-font-family: sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-color: #a768f3;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-radius: 4px;
+    -fx-padding: 6px 12px;
+}
+
+.btn_primary:hover {
+    -fx-background-color: #8b39ef;
 }

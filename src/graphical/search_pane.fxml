@@ -10,7 +10,6 @@
 
 <AnchorPane prefHeight="430.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.SearchPaneController">
    <children>
-      <AnchorPane layoutX="320.0" layoutY="10.0" prefHeight="410.0" prefWidth="334.0" styleClass="card" stylesheets="@container.css" />
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="300.0" styleClass="card" stylesheets="@container.css">
          <children>
             <TextField fx:id="input_search" layoutX="10.0" layoutY="10.0" onAction="#handleEnterInputSearch" onKeyReleased="#handleChangeInputSearch" prefHeight="35.0" prefWidth="240.0" promptText="Search word..." styleClass="input_search" stylesheets="@container.css">
@@ -32,5 +31,6 @@
             </Button>
          </children>
       </AnchorPane>
+      <AnchorPane layoutX="320.0" layoutY="10.0" prefHeight="410.0" prefWidth="334.0" styleClass="card" stylesheets="@container.css" />
    </children>
 </AnchorPane>
