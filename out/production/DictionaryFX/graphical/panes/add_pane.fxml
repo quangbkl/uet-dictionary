@@ -4,9 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="430.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.AddPaneController">
+<AnchorPane prefHeight="430.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.AddPaneController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="300.0" styleClass="card" stylesheets="@container.css">
          <children>
@@ -27,12 +28,17 @@
                </font>
             </Label>
             <TextField fx:id="explain_input" layoutX="100.0" layoutY="130.0" onKeyReleased="#handleChangeInput" prefHeight="35.0" prefWidth="185.0" styleClass="from_input" stylesheets="@container.css" />
-            <Button layoutX="223.0" layoutY="190.0" mnemonicParsing="false" styleClass="btn_primary" stylesheets="@container.css" text="Save" />
+            <Button fx:id="btn_save" layoutX="223.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleClickSave" styleClass="btn_primary" stylesheets="@container.css" text="Save" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="320.0" layoutY="10.0" prefHeight="410.0" prefWidth="334.0" styleClass="card" stylesheets="@container.css">
          <children>
-            <Button layoutX="122.0" layoutY="103.0" mnemonicParsing="false" text="Button" />
+            <Label layoutX="15.0" layoutY="14.0" prefHeight="41.0" prefWidth="304.0" style="-fx-border-width: 0 0 1 0; -fx-border-color: #eeeeee; -fx-alignment: top_left; -fx-padding: 0 0 14 0;" text="Message">
+               <font>
+                  <Font name="SansSerif Bold" size="22.0" />
+               </font>
+            </Label>
+            <VBox fx:id="v_box_message" layoutY="60.0" prefHeight="350.0" prefWidth="334.0" styleClass="v_box_message" stylesheets="@container.css" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

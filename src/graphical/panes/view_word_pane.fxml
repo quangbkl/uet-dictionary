@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="304.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="304.0">
+         <children>
+            <HBox>
+               <children>
+                  <Label fx:id="view_word_spelling" text="Spelling" wrapText="true">
+                     <font>
+                        <Font name="SansSerif Regular" size="26.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="32.0" fitWidth="32.0">
+                     <image>
+                        <Image url="@../../../../../../../AppData/Local/Temp/icons8_Speaker_48px.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="208.0">
+               <image>
+                  <Image url="@../../../../../../../AppData/Local/Temp/icons8_Star_52px.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="240.0">
+               <image>
+                  <Image url="@../../../../../../../AppData/Local/Temp/icons8_Edit_52px_2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="272.0">
+               <image>
+                  <Image url="@../../../../../../../AppData/Local/Temp/icons8_Delete_52px_2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="208.0">
+               <image>
+                  <Image url="@../../../../../../../AppData/Local/Temp/icons8_Star_Filled_52px.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label fx:id="view_word_explain" text="Explain" wrapText="true">
+         <font>
+            <Font name="SansSerif Regular" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</VBox>

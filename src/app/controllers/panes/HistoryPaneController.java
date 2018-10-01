@@ -1,4 +1,4 @@
-package app.controllers;
+package app.controllers.panes;
 
 public class HistoryPaneController {
 }

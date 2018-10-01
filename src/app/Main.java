@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../graphical/container.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../graphical/panes/container.fxml"));
         primaryStage.setTitle("Dictionary BKL");
         primaryStage.setScene(new Scene(root, 720, 480));
         primaryStage.show();

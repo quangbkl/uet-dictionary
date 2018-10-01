@@ -19,6 +19,11 @@
     -fx-border-color: #a768f3;
 }
 
+.list_view_search {
+    -fx-border-color: #e5e9ec;
+    -fx-background-color: none;
+}
+
 .btn_micro {
     -fx-border-color: #e5e9ec;
     -fx-background-radius: 0;
@@ -65,4 +70,12 @@
 
 .btn_primary:hover {
     -fx-background-color: #8b39ef;
+}
+
+.v_box_message {
+    -fx-padding: 15px 15px 15px 15px;
+}
+
+.panel {
+    -fx-padding: 15px 15px 15px 15px;
 }
