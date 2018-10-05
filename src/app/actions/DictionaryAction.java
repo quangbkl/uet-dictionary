@@ -1,11 +1,12 @@
 package app.actions;
 
-import app.dictionary.DictionaryManagement;
-import app.dictionary.Word;
+import app.dictionary.advanced.DictionaryHTMLManagement;
+import app.dictionary.base.DictionaryManagement;
+import app.dictionary.base.Word;
 
 import java.util.ArrayList;
 
-public class DictionaryAction extends DictionaryManagement {
+public class DictionaryAction extends DictionaryHTMLManagement {
     public void showSearcher(String spelling) {
         ArrayList<Word> words = this.dictionarySearcher(spelling);
         for (Word word : words) {

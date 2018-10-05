@@ -1,8 +1,7 @@
 package app.controllers.panes;
 
-import app.actions.DictionaryAction;
 import app.controllers.elements.AlertController;
-import app.dictionary.Word;
+import app.dictionary.base.Word;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,17 +17,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddPaneController implements Initializable {
+    private ContainerController state;
     @FXML
     private TextField spelling_input, explain_input;
     @FXML
     private VBox v_box_message;
     @FXML
     private Button btn_save;
-    private DictionaryAction dictionaryAction = new DictionaryAction();
 
     private void handleChangeSpelling() {
         String spellingValue = spelling_input.getText().trim();
-        Word word = dictionaryAction.dictionaryLookup(spellingValue);
+        Word word = state.getDictionaryAction().dictionaryLookup(spellingValue);
 
         if (word != null && word.getSpelling().equals(spellingValue)) {
             this.createAlert("Word existed!", "This word already exists, you can only edit word.");
@@ -69,17 +68,18 @@ public class AddPaneController implements Initializable {
     private void createAlert(String header, String content, String keyId) {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("../../../graphical/elements/alert.fxml"));
-        VBox viewWordVBox;
+        VBox alertVBox;
         try {
-            viewWordVBox = fxmlLoader.load();
+            alertVBox = fxmlLoader.load();
         } catch (IOException e) {
             System.out.println("Error load alert pane.");
             return;
         }
+        alertVBox.setId("new_alert_message");
         AlertController controller = fxmlLoader.getController();
         controller.initData(header, content);
         this.removeAlert(keyId);
-        v_box_message.getChildren().add(0, viewWordVBox);
+        v_box_message.getChildren().add(0, alertVBox);
 
 //        Timeline closeAlertTimeout = new Timeline(new KeyFrame(Duration.seconds(3), event -> v_box_message.getChildren().remove(alertVBox)));
 //        closeAlertTimeout.play();
@@ -92,10 +92,15 @@ public class AddPaneController implements Initializable {
     private void removeAlert(String keyId) {
         ObservableList childrenVBoxMessage = v_box_message.getChildren();
         for (int i = 0; i < childrenVBoxMessage.size(); i++) {
-            if (v_box_message.getChildren().get(i).getId().equals(keyId)) {
+            String idAlert = v_box_message.getChildren().get(i).getId();
+            if (idAlert != null && idAlert.equals(keyId)) {
                 v_box_message.getChildren().remove(i--);
             }
         }
+    }
+
+    public void initData(ContainerController state) {
+        this.state = state;
     }
 
     @Override

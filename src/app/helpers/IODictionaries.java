@@ -1,6 +1,6 @@
 package app.helpers;
 
-import app.dictionary.Word;
+import app.dictionary.base.Word;
 
 import java.io.*;
 import java.util.ArrayList;

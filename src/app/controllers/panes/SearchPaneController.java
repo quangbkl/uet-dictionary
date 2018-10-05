@@ -1,9 +1,6 @@
 package app.controllers.panes;
 
-import app.actions.DictionaryAction;
-import app.controllers.elements.AlertController;
-import app.dictionary.DictionaryManagement;
-import app.dictionary.Word;
+import app.dictionary.base.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,13 +20,15 @@ import java.util.ResourceBundle;
 
 public class SearchPaneController implements Initializable {
 
+    private ContainerController state;
+
     @FXML
     private TextField input_search;
     @FXML
     private ListView<String> search_list_view;
     @FXML
     private AnchorPane right_content;
-    private DictionaryAction dictionaryAction = new DictionaryAction();
+    private ViewWordPaneController controllerViewWord;
 
     @FXML
     public void handleClickMicro(ActionEvent event) {
@@ -47,8 +46,12 @@ public class SearchPaneController implements Initializable {
     }
 
     public void actionSearch(String spelling) {
-        ArrayList<String> stringWords = dictionaryAction.getStringSearchs(spelling);
+        ArrayList<String> stringWords = state.getDictionaryAction().getStringSearchs(spelling);
         search_list_view.getItems().setAll(stringWords);
+
+        Word word = state.getDictionaryAction().dictionaryLookup(spelling);
+        if (word != null)
+            controllerViewWord.initData(word.getSpelling(), word.getExplain());
     }
 
     @FXML
@@ -68,21 +71,20 @@ public class SearchPaneController implements Initializable {
         try {
             viewWordVBox = fxmlLoader.load();
         } catch (IOException e) {
-            System.out.println("Error load alert pane.");
+            System.out.println("Error load view word pane.");
             return;
         }
         right_content.getChildren().addAll(viewWordVBox);
-//        AlertController controller = fxmlLoader.getController();
+        controllerViewWord = fxmlLoader.getController();
+        controllerViewWord.initData(spelling, explain);
+    }
+
+    public void initData(ContainerController state) {
+        this.state = state;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadViewWord("Quang", "Quang BKL");
-//        ArrayList<String> items = new ArrayList<>();
-//        items.add("Hello");
-//        items.add("I am Quang");
-//        items.add("The Flash");
-//        items.add("BKL");
-//        search_list_view.getItems().setAll(items);
+        loadViewWord("Spelling", "Explain");
     }
 }
