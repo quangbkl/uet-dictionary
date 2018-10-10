@@ -12,15 +12,21 @@ public class ViewWordPaneController {
     @FXML
     private WebView view_word_web_view;
     private WebEngine viewWordWebEngine;
+    private ContainerController state;
 
     @FXML
     public void onMouseClickSpeak(MouseEvent event) {
         System.out.println("Speak text");
     }
 
-    public void initData(String spelling, String explain) {
+    @FXML
+    public void handleRemoveWord(MouseEvent event) {
+        this.state.getDictionaryAction().removeWord(view_word_spelling.getText());
+    }
+
+    public void initData(ContainerController state, String spelling, String explain) {
+        this.state = state;
         view_word_spelling.setText(spelling);
-//        view_word_explain.setText(explain);
         viewWordWebEngine = view_word_web_view.getEngine();
         viewWordWebEngine.loadContent(explain, "text/html");
     }

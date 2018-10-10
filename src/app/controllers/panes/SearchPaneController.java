@@ -1,5 +1,6 @@
 package app.controllers.panes;
 
+import app.actions.DictionaryAction;
 import app.dictionary.base.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -19,7 +21,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SearchPaneController implements Initializable {
-
     private ContainerController state;
 
     @FXML
@@ -45,13 +46,20 @@ public class SearchPaneController implements Initializable {
         }
     }
 
+    @FXML
+    public void handleSelectItemListView(MouseEvent event) {
+        String spelling = search_list_view.getSelectionModel().getSelectedItem();
+        input_search.setText(spelling);
+        actionSearch(spelling);
+    }
+
     public void actionSearch(String spelling) {
-        ArrayList<String> stringWords = state.getDictionaryAction().getStringSearchs(spelling);
+        ArrayList<String> stringWords = this.state.getDictionaryAction().getStringSearchs(spelling);
         search_list_view.getItems().setAll(stringWords);
 
         Word word = state.getDictionaryAction().dictionaryLookup(spelling);
         if (word != null)
-            controllerViewWord.initData(word.getSpelling(), word.getExplain());
+            controllerViewWord.initData(this.state, word.getSpelling(), word.getExplain());
     }
 
     @FXML
@@ -59,7 +67,7 @@ public class SearchPaneController implements Initializable {
         if (event.getSource() == input_search) {
             String searchText = input_search.getText();
             if (!searchText.isEmpty()) {
-                this.actionSearch(searchText);
+                actionSearch(searchText);
             }
         }
     }
@@ -76,7 +84,7 @@ public class SearchPaneController implements Initializable {
         }
         right_content.getChildren().addAll(viewWordVBox);
         controllerViewWord = fxmlLoader.getController();
-        controllerViewWord.initData(spelling, explain);
+        controllerViewWord.initData(this.state, spelling, explain);
     }
 
     public void initData(ContainerController state) {

@@ -29,6 +29,16 @@ public class DictionaryManagement {
         }
     }
 
+    public void saveWordsToFile() {
+        IODictionaries ioDictionaries = new IODictionaries();
+        ioDictionaries.write(dictionary.getWords(), "src/data/dictionaries.txt");
+    }
+
+    public void addWord(Word word) {
+        dictionary.push(word);
+        this.saveWordsToFile();
+    }
+
     public void dictionaryLookup() {
         Scanner scanner = new Scanner(System.in);
         String spelling = scanner.nextLine();

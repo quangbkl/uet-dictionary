@@ -2,15 +2,19 @@ package app.controllers.panes;
 
 import app.controllers.elements.AlertController;
 import app.dictionary.base.Word;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,17 +23,24 @@ import java.util.ResourceBundle;
 public class AddPaneController implements Initializable {
     private ContainerController state;
     @FXML
-    private TextField spelling_input, explain_input;
+    private TextField spelling_input;
+    @FXML
+    private TextArea explain_input;
     @FXML
     private VBox v_box_message;
     @FXML
     private Button btn_save;
 
-    private void handleChangeSpelling() {
+    private boolean isExitsSpelling() {
         String spellingValue = spelling_input.getText().trim();
         Word word = state.getDictionaryAction().dictionaryLookup(spellingValue);
+        return word != null && word.getSpelling().equals(spellingValue);
+    }
 
-        if (word != null && word.getSpelling().equals(spellingValue)) {
+    private void handleChangeSpelling() {
+        String spellingValue = spelling_input.getText().trim();
+
+        if (this.isExitsSpelling()) {
             this.createAlert("Word existed!", "This word already exists, you can only edit word.");
         } else {
             this.createAlert("Word doesn't exist!", "You can add a new word.");
@@ -57,15 +68,25 @@ public class AddPaneController implements Initializable {
     @FXML
     public void handleClickSave(ActionEvent event) {
         if (event.getSource() == btn_save) {
-            this.createAlert("Quang", "BKL");
+            if (!isExitsSpelling()) {
+                Word word = new Word(spelling_input.getText().trim(), explain_input.getText().trim());
+                state.getDictionaryAction().addWord(word);
+                this.createAlert("Success!", "Add new word successfully.");
+            } else {
+                this.createAlert("Fail!", "This word already exists, you can only edit word.");
+            }
         }
     }
 
     private void createAlert(String header, String content) {
-        this.createAlert(header, content, "new_alert_message");
+        this.createAlert(header, content, "new_alert_message", true);
     }
 
     private void createAlert(String header, String content, String keyId) {
+        this.createAlert(header, content, keyId, true);
+    }
+
+    private void createAlert(String header, String content, String keyId, boolean close) {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("../../../graphical/elements/alert.fxml"));
         VBox alertVBox;
@@ -81,8 +102,10 @@ public class AddPaneController implements Initializable {
         this.removeAlert(keyId);
         v_box_message.getChildren().add(0, alertVBox);
 
-//        Timeline closeAlertTimeout = new Timeline(new KeyFrame(Duration.seconds(3), event -> v_box_message.getChildren().remove(alertVBox)));
-//        closeAlertTimeout.play();
+        if (close) {
+            Timeline closeAlertTimeout = new Timeline(new KeyFrame(Duration.seconds(3), event -> v_box_message.getChildren().remove(alertVBox)));
+            closeAlertTimeout.play();
+        }
     }
 
     private void removeAlert() {

@@ -29,7 +29,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label layoutX="247.0" layoutY="3.0">
+            <Label layoutX="247.0" layoutY="3.0" onMouseClicked="#handleRemoveWord">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="26.0">
                      <image>

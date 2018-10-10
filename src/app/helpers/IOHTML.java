@@ -7,13 +7,16 @@ import java.util.ArrayList;
 
 public class IOHTML {
     public ArrayList<Word> read() {
-        String fileName = "src/data/lingoes/E_V.txt";
+        return this.read("src/data/lingoes/E_V.txt");
+    }
+
+    public ArrayList<Word> read(String path) {
         String line = null;
         String[] words;
         ArrayList<Word> result = new ArrayList<>();
 
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(fileName), "UTF8");
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(path), "UTF8");
 
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -29,7 +32,7 @@ public class IOHTML {
 
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + fileName + "'");
+            System.out.println("Unable to open file '" + path + "'");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -38,10 +41,12 @@ public class IOHTML {
     }
 
     public void write(ArrayList<Word> words) {
-        String fileName = "src/data/lingoes/E_V.txt";
+        this.write(words, "src/data/lingoes/E_V.txt");
+    }
 
+    public void write(ArrayList<Word> words, String path) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+            FileOutputStream fileOutputStream = new FileOutputStream(path);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, "UTF8");
             BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
 

@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,36 +17,46 @@ public class ContainerController implements Initializable {
     private Button btn_nav_search, btn_nav_add, btn_nav_history, btn_nav_bookmark;
     @FXML
     private AnchorPane content_pane;
+
+    private DictionaryAction dictionaryAction = new DictionaryAction();
     private AnchorPane anchorAddPane = null, anchorBookmarkPane = null, anchorHistoryPane = null, anchorSearchPane = null;
+    private AnchorPane currentPane;
     private AddPaneController addPaneController;
     private BookmarkPaneController bookmarkPaneController;
     private HistoryPaneController historyPaneController;
     private SearchPaneController searchPaneController;
-    private ViewWordPaneController viewWordPaneController;
-    private DictionaryAction dictionaryAction = new DictionaryAction();
 
     public DictionaryAction getDictionaryAction() {
         return dictionaryAction;
     }
 
-    void showHistoryPane() {
-        content_pane.getChildren().setAll(anchorHistoryPane);
+    private void setContentPane(AnchorPane anchorPane) {
+        this.content_pane.getChildren().setAll(anchorPane);
+        this.currentPane = anchorPane;
+    }
+
+    public void showHistoryPane() {
+        this.setContentPane(anchorHistoryPane);
         historyPaneController.initData(this);
     }
 
-    private void showAddPane() {
-        content_pane.getChildren().setAll(anchorAddPane);
+    public void showAddPane() {
+        this.setContentPane(anchorAddPane);
         addPaneController.initData(this);
     }
 
-    private void showBookmarkPane() {
-        content_pane.getChildren().setAll(anchorBookmarkPane);
+    public void showBookmarkPane() {
+        this.setContentPane(anchorBookmarkPane);
         bookmarkPaneController.initData(this);
     }
 
-    private void showSearchPane() {
-        content_pane.getChildren().setAll(anchorSearchPane);
+    public void showSearchPane() {
+        this.setContentPane(anchorSearchPane);
         searchPaneController.initData(this);
+    }
+
+    public void reload() {
+        //TODO: relaod all pane.
     }
 
     @FXML
@@ -103,6 +112,6 @@ public class ContainerController implements Initializable {
             System.out.println("Error load history_pane pane.");
         }
 
-        content_pane.getChildren().setAll(anchorSearchPane);
+        this.showSearchPane();
     }
 }

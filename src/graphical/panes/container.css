@@ -47,10 +47,14 @@
 
 .from_input {
     -fx-border-color: #e5e9ec;
-    -fx-background-color: white;
+    -fx-background-color: none;
     -fx-background-radius: 0;
     -fx-border-width: 1px;
     -fx-border-radius: 4px;
+
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
+    -fx-text-box-border: -fx-control-inner-background;
 }
 
 .from_input:focused {
