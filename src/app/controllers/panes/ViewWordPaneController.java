@@ -11,8 +11,11 @@ public class ViewWordPaneController {
     private Label view_word_spelling;
     @FXML
     private WebView view_word_web_view;
+    @FXML
+    private Label trueBookmark;
     private WebEngine viewWordWebEngine;
     private ContainerController state;
+    private boolean isBookmark = false;
 
     @FXML
     public void onMouseClickSpeak(MouseEvent event) {
@@ -22,6 +25,18 @@ public class ViewWordPaneController {
     @FXML
     public void handleRemoveWord(MouseEvent event) {
         this.state.getDictionaryAction().removeWord(view_word_spelling.getText());
+        this.state.reload();
+    }
+
+    @FXML
+    public void handleClickBookmark(MouseEvent event) {
+        if (isBookmark) {
+            trueBookmark.setVisible(true);
+        } else {
+            trueBookmark.setVisible(false);
+        }
+
+        isBookmark = !isBookmark;
     }
 
     public void initData(ContainerController state, String spelling, String explain) {

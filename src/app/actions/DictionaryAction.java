@@ -7,6 +7,7 @@ import app.dictionary.base.Word;
 import java.util.ArrayList;
 
 public class DictionaryAction extends DictionaryHTMLManagement {
+
     public void showSearcher(String spelling) {
         ArrayList<Word> words = this.dictionarySearcher(spelling);
         for (Word word : words) {

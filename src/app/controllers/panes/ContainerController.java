@@ -56,7 +56,8 @@ public class ContainerController implements Initializable {
     }
 
     public void reload() {
-        //TODO: relaod all pane.
+        // TODO: relaod all pane.
+        searchPaneController.reload();
     }
 
     @FXML

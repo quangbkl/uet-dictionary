@@ -44,7 +44,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label layoutX="278.0" layoutY="3.0">
+            <Label fx:id="falseBookmark" layoutX="278.0" layoutY="3.0" onMouseClicked="#handleClickBookmark">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="26.0">
                      <image>
@@ -59,7 +59,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label layoutX="278.0" layoutY="3.0">
+            <Label fx:id="trueBookmark" layoutX="278.0" layoutY="3.0" onMouseClicked="#handleClickBookmark">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="26.0">
                      <image>

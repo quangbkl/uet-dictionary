@@ -49,6 +49,7 @@ public class SearchPaneController implements Initializable {
     @FXML
     public void handleSelectItemListView(MouseEvent event) {
         String spelling = search_list_view.getSelectionModel().getSelectedItem();
+        System.out.println(spelling);
         input_search.setText(spelling);
         actionSearch(spelling);
     }
@@ -70,6 +71,12 @@ public class SearchPaneController implements Initializable {
                 actionSearch(searchText);
             }
         }
+    }
+
+    public void reload() {
+        input_search.setText("");
+        search_list_view.getItems().clear();
+        controllerViewWord.initData(this.state, "", "");
     }
 
     private void loadViewWord(String spelling, String explain) {
