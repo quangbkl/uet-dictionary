@@ -26,7 +26,7 @@
       </AnchorPane>
       <AnchorPane layoutY="50.0" prefHeight="430.0" prefWidth="56.0" style="-fx-background-color: #2a3140;">
          <children>
-            <Button fx:id="btn_nav_search" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#handleClickSidebar" prefHeight="45.0" prefWidth="56.0" style="-fx-background-color: #394357;" styleClass="button_nav" stylesheets="@container.css">
+            <Button fx:id="btn_nav_search" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#handleClickSidebar" prefHeight="45.0" prefWidth="56.0" styleClass="button_nav" stylesheets="@container.css">
                <graphic>
                   <ImageView fitHeight="16.0" fitWidth="16.0">
                      <image>

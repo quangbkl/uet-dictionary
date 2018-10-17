@@ -21,15 +21,15 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SearchPaneController implements Initializable {
-    private ContainerController state;
+    protected ContainerController state;
 
     @FXML
-    private TextField input_search;
+    protected TextField input_search;
     @FXML
-    private ListView<String> search_list_view;
+    protected ListView<String> search_list_view;
     @FXML
-    private AnchorPane right_content;
-    private ViewWordPaneController controllerViewWord;
+    protected AnchorPane right_content;
+    protected ViewWordPaneController controllerViewWord;
 
     @FXML
     public void handleClickMicro(ActionEvent event) {
@@ -49,7 +49,7 @@ public class SearchPaneController implements Initializable {
     @FXML
     public void handleSelectItemListView(MouseEvent event) {
         String spelling = search_list_view.getSelectionModel().getSelectedItem();
-        System.out.println(spelling);
+        if (spelling == null) return;
         input_search.setText(spelling);
         actionSearch(spelling);
     }
@@ -69,17 +69,32 @@ public class SearchPaneController implements Initializable {
             String searchText = input_search.getText();
             if (!searchText.isEmpty()) {
                 actionSearch(searchText);
+            } else {
+                search_list_view.getItems().clear();
             }
         }
     }
 
-    public void reload() {
+    public void reset() {
         input_search.setText("");
         search_list_view.getItems().clear();
         controllerViewWord.initData(this.state, "", "");
     }
 
-    private void loadViewWord(String spelling, String explain) {
+    public void reload() {
+        if (state == null) return;
+
+        String searchText = input_search.getText();
+        if (!searchText.isEmpty()) {
+            actionSearch(searchText);
+        } else {
+            search_list_view.getItems().clear();
+        }
+
+        controllerViewWord.reload();
+    }
+
+    protected void loadViewWord(String spelling, String explain) {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("../../../graphical/panes/view_word_pane.fxml"));
         VBox viewWordVBox;
@@ -96,10 +111,15 @@ public class SearchPaneController implements Initializable {
 
     public void initData(ContainerController state) {
         this.state = state;
+        if (controllerViewWord == null) {
+            loadViewWord("", "");
+        }
+
+        this.reload();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadViewWord("Spelling", "Explain");
+//        loadViewWord("Spelling", "Explain");
     }
 }

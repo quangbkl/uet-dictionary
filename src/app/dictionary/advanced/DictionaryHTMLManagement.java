@@ -17,7 +17,7 @@ public class DictionaryHTMLManagement extends DictionaryManagement {
         IOHTML rd = new IOHTML();
         ArrayList<Word> adds = rd.read();
         Collections.sort(adds, new SortWord());
-        dictionary.setWords(rd.read());
+        dictionary.setWords(adds);
         System.out.println("End insert from file...");
     }
 
