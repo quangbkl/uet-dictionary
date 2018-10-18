@@ -8,12 +8,18 @@ public class TestDrive {
     public static void main(String[] args) {
         String searchAPI = null;
 
+//        try {
+//            System.out.println(GoogleAPI.translate("economy"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
         try {
-            searchAPI = SendRequest.sendGET("https://clients1.google.com/complete/search?q=economic&hl=en&ds=translate&client=translate-web");
+            System.out.println(GoogleAPI.search("economy"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println(searchAPI);
+//        System.out.println(searchAPI);
     }
 }
