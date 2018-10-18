@@ -14,7 +14,31 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="304.0" style="-fx-padding: 0 0 10px 0;">
          <children>
-            <Label layoutX="216.0" layoutY="3.0">
+            <HBox>
+               <children>
+                  <Label fx:id="view_word_spelling" text="Spelling" wrapText="true">
+                     <font>
+                        <Font name="SansSerif Regular" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label onMouseClicked="#onMouseClickSpeak" style="-fx-padding: 3 0 0 5;">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="26.0">
+                           <image>
+                              <Image url="@../../data/icons/icons8_Speaker_48px.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </HBox>
+            <Label layoutX="216.0" layoutY="3.0" onMouseClicked="#handleClickEdit">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="26.0">
                      <image>
@@ -74,30 +98,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <HBox>
-               <children>
-                  <Label fx:id="view_word_spelling" text="Spelling" wrapText="true">
-                     <font>
-                        <Font name="SansSerif Regular" size="26.0" />
-                     </font>
-                  </Label>
-                  <Label onMouseClicked="#onMouseClickSpeak" style="-fx-padding: 3 0 0 5;">
-                     <graphic>
-                        <ImageView fitHeight="26.0" fitWidth="26.0">
-                           <image>
-                              <Image url="@../../data/icons/icons8_Speaker_48px.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-               </children>
-            </HBox>
          </children>
       </AnchorPane>
       <WebView fx:id="view_word_web_view" prefHeight="335.0" prefWidth="-1.0" />

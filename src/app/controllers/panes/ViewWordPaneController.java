@@ -29,6 +29,12 @@ public class ViewWordPaneController {
     }
 
     @FXML
+    public void handleClickEdit(MouseEvent event) {
+        String spelling = view_word_spelling.getText();
+        this.state.showEditPane(spelling);
+    }
+
+    @FXML
     public void handleClickBookmark(MouseEvent event) {
         String spelling = view_word_spelling.getText();
         Word word = state.getBookmarkAction().dictionaryLookup(spelling);
@@ -53,6 +59,7 @@ public class ViewWordPaneController {
         String spelling = view_word_spelling.getText();
         this.state.getBookmarkAction().removeWord(spelling);
         this.state.resetBookmark();
+
     }
 
     public void loadBookmark() {

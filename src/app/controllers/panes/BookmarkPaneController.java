@@ -6,7 +6,7 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
 
-public class BookmarkPaneController extends SearchPaneController {
+public class BookmarkPaneController extends ViewController {
     @Override
     public void actionSearch(String spelling) {
         ArrayList<String> stringWords = this.state.getBookmarkAction().getStringSearchs(spelling);

@@ -2,6 +2,7 @@ package app.controllers.panes;
 
 import app.actions.BookmarkAction;
 import app.actions.DictionaryAction;
+import app.actions.HistoryAction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,18 +17,24 @@ import java.util.ResourceBundle;
 public class ContainerController implements Initializable {
     private DictionaryAction dictionaryAction = new DictionaryAction();
     private BookmarkAction bookmarkAction = new BookmarkAction();
+    private HistoryAction historyAction = new HistoryAction();
 
     @FXML
-    private Button btn_nav_search, btn_nav_add, btn_nav_history, btn_nav_bookmark;
+    private Button btn_nav_search, btn_nav_add, btn_nav_history, btn_nav_bookmark, btn_nav_edit, btn_nav_settings;
     @FXML
     private AnchorPane content_pane;
 
-    private AnchorPane anchorAddPane = null, anchorBookmarkPane = null, anchorHistoryPane = null, anchorSearchPane = null;
+    private AnchorPane anchorAddPane = null;
+    private AnchorPane anchorBookmarkPane = null;
+    private AnchorPane anchorHistoryPane = null;
+    private AnchorPane anchorSearchPane = null;
+    private AnchorPane anchorEditPane = null;
     private AnchorPane currentPane;
     private AddPaneController addPaneController;
     private BookmarkPaneController bookmarkPaneController;
     private HistoryPaneController historyPaneController;
     private SearchPaneController searchPaneController;
+    private EditPaneController editPaneController;
 
 
     public DictionaryAction getDictionaryAction() {
@@ -36,6 +43,10 @@ public class ContainerController implements Initializable {
 
     public BookmarkAction getBookmarkAction() {
         return bookmarkAction;
+    }
+
+    public HistoryAction getHistoryAction() {
+        return historyAction;
     }
 
     private void setContentPane(AnchorPane anchorPane) {
@@ -57,12 +68,23 @@ public class ContainerController implements Initializable {
         btn_nav_add.setStyle("-fx-background-color:  #394357;");
     }
 
+    public void showEditPane() {
+        this.setContentPane(anchorEditPane);
+        editPaneController.initData(this);
+        this.resetStyleNav();
+        btn_nav_edit.setStyle("-fx-background-color:  #394357;");
+    }
+
+    public void showEditPane(String spelling) {
+        this.showEditPane();
+        editPaneController.initData(this, spelling);
+    }
+
     public void showBookmarkPane() {
         this.setContentPane(anchorBookmarkPane);
         bookmarkPaneController.initData(this);
         this.resetStyleNav();
         btn_nav_bookmark.setStyle("-fx-background-color:  #394357;");
-
     }
 
     public void showSearchPane() {
@@ -77,12 +99,14 @@ public class ContainerController implements Initializable {
         btn_nav_add.setStyle(null);
         btn_nav_history.setStyle(null);
         btn_nav_bookmark.setStyle(null);
+        btn_nav_edit.setStyle(null);
     }
 
     public void reset() {
         // TODO: relaod all pane.
         searchPaneController.reset();
         bookmarkPaneController.reset();
+        historyPaneController.reset();
     }
 
     public void reloadBookmark() {
@@ -103,6 +127,8 @@ public class ContainerController implements Initializable {
             showHistoryPane();
         } else if (event.getSource() == btn_nav_bookmark) {
             showBookmarkPane();
+        } else if (event.getSource() == btn_nav_edit) {
+            showEditPane();
         }
 
         System.out.println("Click sidebar");
@@ -128,6 +154,16 @@ public class ContainerController implements Initializable {
             addPaneController.initData(this);
         } catch (IOException e) {
             System.out.println("Error load add_pane pane.");
+        }
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("../../../graphical/panes/edit_pane.fxml"));
+            anchorEditPane = fxmlLoader.load();
+            editPaneController = fxmlLoader.getController();
+            editPaneController.initData(this);
+        } catch (IOException e) {
+            System.out.println("Error load edit_pane pane.");
         }
 
         try {

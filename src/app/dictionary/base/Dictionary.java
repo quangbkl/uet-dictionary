@@ -8,8 +8,7 @@ public class Dictionary {
     public void push(Word word) {
         int length = words.size();
         int index = searchIndexInsert(0, length - 1, word.getSpelling());
-        if (index < length && index >= 0) words.add(index, word);
-        else words.add(word);
+        if (index <= length && index >= 0) words.add(index, word);
     }
 
     private int searchIndexInsert(int start, int end, String spelling) {
