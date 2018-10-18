@@ -40,10 +40,8 @@ public class ViewWordPaneController {
         Word word = state.getBookmarkAction().dictionaryLookup(spelling);
         if (word != null) {
             this.removeBookmark();
-//            trueBookmark.setVisible(false);
         } else {
             this.addBookmark();
-//            trueBookmark.setVisible(true);
         }
         this.loadBookmark();
         this.state.reloadBookmark();

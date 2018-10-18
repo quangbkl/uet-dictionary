@@ -130,8 +130,6 @@ public class ContainerController implements Initializable {
         } else if (event.getSource() == btn_nav_edit) {
             showEditPane();
         }
-
-        System.out.println("Click sidebar");
     }
 
     @Override
