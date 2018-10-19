@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import services.GoogleAPI;
+
+import java.io.IOException;
 
 public class ViewWordPaneController {
     @FXML
@@ -19,7 +22,12 @@ public class ViewWordPaneController {
 
     @FXML
     public void onMouseClickSpeak(MouseEvent event) {
-        System.out.println("Speak text");
+        String spelling = view_word_spelling.getText();
+        try {
+            GoogleAPI.speak(spelling);
+        } catch (IOException e) {
+            System.out.println("[ERROR]: Speak word.");
+        }
     }
 
     @FXML
@@ -79,6 +87,8 @@ public class ViewWordPaneController {
         view_word_spelling.setText(spelling);
         viewWordWebEngine = view_word_web_view.getEngine();
         viewWordWebEngine.loadContent(explain, "text/html");
+        viewWordWebEngine.setUserStyleSheetLocation(getClass().getResource("../../../graphical/panes/web_view.css").toString());
+
 
         this.loadBookmark();
     }

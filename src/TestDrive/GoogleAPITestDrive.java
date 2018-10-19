@@ -1,10 +1,15 @@
 package TestDrive;
 
-import services.GoogleAPI;
-
 import java.io.IOException;
 
 public class GoogleAPITestDrive {
-    public static void main(String[] args) throws IOException {
+    public String getStyle() {
+        String value = getClass().getResource("../graphical/panes/web_view.css").toString();
+        return value;
+    }
+
+    public static void main(String[] args) {
+        GoogleAPITestDrive googleAPITestDrive = new GoogleAPITestDrive();
+        System.out.println(googleAPITestDrive.getStyle());
     }
 }
