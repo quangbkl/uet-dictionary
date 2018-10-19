@@ -2,6 +2,7 @@ package services;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.io.IOException;
@@ -18,6 +19,8 @@ public class GoogleAPI {
     public static String GOOGLE_AUDIO_URL = "http://translate.google.com/translate_tts";
     public static String GOOGLE_SEARCH_URL = "https://clients1.google.com/complete/search";
 
+    public static StringToHTML stringToHTML = new StringToHTML();
+
     public static String translate(String text) throws IOException {
         return translate("vi", text);
     }
@@ -29,7 +32,13 @@ public class GoogleAPI {
     public static String translate(String sourceLanguage, String targetLanguage, String text) throws IOException {
         String url = generateTranslateURL(sourceLanguage, targetLanguage, text);
         String result = SendRequest.sendGET(url);
-        return result;
+        try {
+            return stringToHTML.parserHTML(result);
+        } catch (ParseException e) {
+            System.out.println("[ERROR]: Error StringToHTML.");
+        }
+
+        return null;
     }
 
     public static String search(String text) throws IOException {

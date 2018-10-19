@@ -89,7 +89,6 @@ public class ViewWordPaneController {
         viewWordWebEngine.loadContent(explain, "text/html");
         viewWordWebEngine.setUserStyleSheetLocation(getClass().getResource("../../../graphical/panes/web_view.css").toString());
 
-
         this.loadBookmark();
     }
 }
