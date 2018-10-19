@@ -57,8 +57,8 @@ public class ViewWordPaneController {
 
     public void addBookmark() {
         String spelling = view_word_spelling.getText();
-        Word word = this.state.getDictionaryAction().dictionaryLookup(spelling);
-        if (word != null) this.state.getBookmarkAction().addWord(word);
+        String html = (String) viewWordWebEngine.executeScript("document.documentElement.outerHTML");
+        this.state.getBookmarkAction().addWord(new Word(spelling, html));
     }
 
     public void removeBookmark() {

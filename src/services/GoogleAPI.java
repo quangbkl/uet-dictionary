@@ -19,7 +19,8 @@ public class GoogleAPI {
     public static String GOOGLE_AUDIO_URL = "http://translate.google.com/translate_tts";
     public static String GOOGLE_SEARCH_URL = "https://clients1.google.com/complete/search";
 
-    public static StringToHTML stringToHTML = new StringToHTML();
+    public static TranslateToHTML translateToHTML = new TranslateToHTML();
+    public static SearchToHTML searchToHTML = new SearchToHTML();
 
     public static String translate(String text) throws IOException {
         return translate("vi", text);
@@ -33,26 +34,32 @@ public class GoogleAPI {
         String url = generateTranslateURL(sourceLanguage, targetLanguage, text);
         String result = SendRequest.sendGET(url);
         try {
-            return stringToHTML.parserHTML(result);
+            return translateToHTML.parserHTML(result);
         } catch (ParseException e) {
-            System.out.println("[ERROR]: Error StringToHTML.");
+            System.out.println("[ERROR]: Error TranslateToHTML.");
         }
 
         return null;
     }
 
-    public static String search(String text) throws IOException {
-        return search("vi", text);
+    public static ArrayList<String> search(String text) throws IOException {
+        return search("en", text);
     }
 
-    public static String search(String sourceLanguage, String text) throws IOException {
+    public static ArrayList<String> search(String sourceLanguage, String text) throws IOException {
         String url = generateSearchURL(sourceLanguage, text);
         String result = SendRequest.sendGET(url);
 
         result = result.replace("window.google.ac.h(", "");
         result = result.substring(0, result.length() - 1);
 
-        return result;
+        try {
+            return searchToHTML.parserHTML(result);
+        } catch (ParseException e) {
+            System.out.println("[ERROR]: Error SearchToHTML.");
+        }
+
+        return new ArrayList<>();
     }
 
     public static void speak(String text) throws IOException {
