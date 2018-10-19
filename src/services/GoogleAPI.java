@@ -1,9 +1,10 @@
 package services;
 
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+
 import java.io.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -15,6 +16,7 @@ public class GoogleAPI {
 
     public static String GOOGLE_TRANSLATE_URL = "https://translate.googleapis.com/translate_a/single";
     public static String GOOGLE_AUDIO_URL = "http://translate.google.com/translate_tts";
+    public static String GOOGLE_SEARCH_URL = "https://clients1.google.com/complete/search";
 
     public static String translate(String text) throws IOException {
         return translate("vi", text);
@@ -34,18 +36,37 @@ public class GoogleAPI {
         return search("vi", text);
     }
 
-    public static String search(String targetLanguage, String text) throws IOException {
-        return search("auto", targetLanguage, text);
-    }
-
-    public static String search(String sourceLanguage, String targetLanguage, String text) throws IOException {
-        String url = generateSearchURL(sourceLanguage, targetLanguage, text);
+    public static String search(String sourceLanguage, String text) throws IOException {
+        String url = generateSearchURL(sourceLanguage, text);
         String result = SendRequest.sendGET(url);
 
         result = result.replace("window.google.ac.h(", "");
         result = result.substring(0, result.length() - 1);
 
         return result;
+    }
+
+    public static void speak(String text) throws IOException {
+        speak("en", text);
+    }
+
+    public static void speak(String language, String text) throws IOException {
+        String url = generateSpeakURL(language, text);
+
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+        int responseCode = con.getResponseCode();
+
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            InputStream audioSrc = con.getInputStream();
+            try {
+                new Player(new BufferedInputStream(audioSrc)).play();
+            } catch (JavaLayerException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static String generateTranslateURL(String sourceLanguage, String targetLanguage, String text) throws UnsupportedEncodingException {
@@ -59,10 +80,20 @@ public class GoogleAPI {
         return url;
     }
 
-    private static String generateSearchURL(String sourceLanguage, String targetLanguage, String text) throws UnsupportedEncodingException {
-        String url = "https://clients1.google.com/complete/search?" +
+    private static String generateSearchURL(String sourceLanguage, String text) throws UnsupportedEncodingException {
+        String url = GOOGLE_SEARCH_URL + "?" +
                 "q=" + URLEncoder.encode(text, "UTF-8") +
-                "&client=translate-web&ds=translate&hl=en";
+                "&client=translate-web&ds=translate" +
+                "&hl=" + sourceLanguage;
+        return url;
+    }
+
+    private static String generateSpeakURL(String language, String text) throws UnsupportedEncodingException {
+        String url = GOOGLE_AUDIO_URL + "?ie=UTF-8" +
+                "&q=" + URLEncoder.encode(text, "UTF-8") +
+                "&tl=" + language +
+                "&tk=" + generateToken(text) +
+                "&client=t";
         return url;
     }
 
