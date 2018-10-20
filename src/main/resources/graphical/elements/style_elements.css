@@ -1,0 +1,22 @@
+.alert {
+    -fx-border-color: #b8daff;
+    -fx-background-color: #cce5ff;
+    -fx-text-fill: #004085;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-padding: 15px 15px 15px 15px;
+}
+
+.alert_heading {
+    -fx-text-fill: #004085;
+    -fx-font-family: sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+    -fx-padding: 0 0 10px 0;
+}
+
+.alert_content {
+    -fx-font-family: sans-serif;
+    -fx-text-fill: #004085;
+}

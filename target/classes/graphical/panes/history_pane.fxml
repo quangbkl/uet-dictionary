@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="430.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.HistoryPaneController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="300.0" styleClass="card" stylesheets="@container.css">
+         <children>
+            <TextField fx:id="input_search" layoutX="10.0" layoutY="10.0" onAction="#handleEnterInputSearch" onKeyReleased="#handleChangeInputSearch" prefHeight="35.0" prefWidth="240.0" promptText="Search word..." styleClass="input_search" stylesheets="@container.css">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button fx:id="btn_audio" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClickMicro" prefHeight="35.0" prefWidth="40.0" styleClass="btn_micro" stylesheets="@container.css">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0">
+                     <image>
+                        <Image url="@../../data/icons/icons8_Microphone_48px_2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <ListView fx:id="search_list_view" layoutX="10.0" layoutY="55.0" onMouseClicked="#handleSelectItemListView" prefHeight="345.0" prefWidth="280.0" styleClass="list_view_search" stylesheets="@container.css" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="right_content" layoutX="320.0" layoutY="10.0" prefHeight="410.0" prefWidth="334.0" styleClass="card" stylesheets="@container.css" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="334.0" styleClass="v_box_message" stylesheets="@container.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.panes.ViewWordPaneController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="304.0" style="-fx-padding: 0 0 10px 0;">
+         <children>
+            <HBox>
+               <children>
+                  <Label fx:id="view_word_spelling" text="Spelling" wrapText="true">
+                     <font>
+                        <Font name="SansSerif Regular" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label onMouseClicked="#onMouseClickSpeak" style="-fx-padding: 3 0 0 5;">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="26.0">
+                           <image>
+                              <Image url="@../../data/icons/icons8_Speaker_48px.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </HBox>
+            <Label layoutX="216.0" layoutY="3.0" onMouseClicked="#handleClickEdit">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0">
+                     <image>
+                        <Image url="@../../data/icons/icons8_Edit_52px_2.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="247.0" layoutY="3.0" onMouseClicked="#handleRemoveWord">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0">
+                     <image>
+                        <Image url="@../../data/icons/icons8_Trash_52px.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="falseBookmark" layoutX="278.0" layoutY="3.0" onMouseClicked="#handleClickBookmark">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0">
+                     <image>
+                        <Image url="@../../data/icons/icons8_Star_52px.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label fx:id="trueBookmark" layoutX="278.0" layoutY="3.0" onMouseClicked="#handleClickBookmark">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0">
+                     <image>
+                        <Image url="@../../data/icons/icons8_Star_Filled_52px.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </AnchorPane>
+      <WebView fx:id="view_word_web_view" prefHeight="335.0" prefWidth="-1.0" />
+   </children>
+</VBox>
